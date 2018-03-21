@@ -1,4 +1,3 @@
-Илюша, [22.03.18 00:34]
 #!/usr/bin/env python3
 
 from ev3dev.ev3 import *
