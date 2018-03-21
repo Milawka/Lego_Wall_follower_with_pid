@@ -1,3 +1,4 @@
+Илюша, [22.03.18 00:34]
 #!/usr/bin/env python3
 
 from ev3dev.ev3 import *
@@ -5,7 +6,6 @@ from time import sleep
 
 
 sensor = UltrasonicSensor("in1")
-tsensor = TouchSensor("in2")
 motorLeft = LargeMotor("outA")
 motorRight = LargeMotor("outB")
 
@@ -25,10 +25,10 @@ pidValue = 0
 
 kP = 10
 kI = 0.01
-kD = 50
+kD = 0.4
 
-motorLeft.run_timed(time_sp=3000, speed_sp=(speed))
-motorRight.run_timed(time_sp=3000, speed_sp=(speed))
+motorLeft.run_timed(time_sp=10000, speed_sp=(speed))
+motorRight.run_timed(time_sp=10000, speed_sp=(speed))
 
 while run:
     sensorValue = sensor.value() / 10
@@ -47,12 +47,8 @@ while run:
     elif pidValue < -1 * 250:
         pidValue = -1*250
 
-    motorRight.run_timed(time_sp=3000, speed_sp=(speed + pidValue))
-    motorLeft.run_timed(time_sp=3000, speed_sp=(speed - pidValue))
-
-    if ts.value():
-      run = False
+    motorRight.run_timed(time_sp=10000, speed_sp=(speed + pidValue))
+    motorLeft.run_timed(time_sp=10000, speed_sp=(speed - pidValue))
 
 motorRight.stop()
 motorLeft.stop()
-
